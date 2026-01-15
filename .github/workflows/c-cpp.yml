@@ -13,13 +13,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: conf
+    - name: Install dependencies
       run: |
         git clone https://github.com/XK9274/sdl2_miyoo/
         cd sdl2_miyoo
         rm -rf sdl2
         git clone -b vanilla https://github.com/XK9274/sdl2_miyoo/
         mv sdl2_miyoo sdl2
+        
+        sudo apt-get update
+        sudo apt-get install -y \
+          libsdl2-dev \
+          libsdl2-image-dev \
+          libsdl2-mixer-dev \
+          liblua5.1-0-dev \
+          libportaudio2 \
+          portaudio19-dev
+    
     - name: make
       run: make
     - name: make check
